@@ -4,14 +4,14 @@ import { GroupModal } from "./GroupModal";
 
 export function SelectEl({ groups, setSelected, setGroups }) {
   const [isModal, setIsModal] = useState(false);
-  setSelected();
+
   return (
     <>
       <div className="select-el">
         <label>그룹</label>
         <select
           onChange={(e) => {
-            setSelected(e.target.value);
+            setSelected(e.target.value || "가족");
           }}
         >
           {groups.map((group) => {
