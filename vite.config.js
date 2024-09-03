@@ -9,6 +9,7 @@ const getAliasPath = (path) => {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/contact-proj",
   server: {
     port: 3000,
   },
