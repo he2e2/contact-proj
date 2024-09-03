@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 
 import { updatedState } from "@atoms";
-import { validateCall, validateName } from "@shared";
+import { validateCall, validateName, DEFAULT_GROUPS } from "@shared";
 
 export function DetailModal({ item, setIsModal }) {
   const [group, setGroup] = useState(item.group);
@@ -70,8 +70,6 @@ const switchName = {
   group: "그룹",
   detail: "메모",
 };
-
-const DEFAULT_GROUPS = ["가족", "친구", "직장", "스터디"];
 
 function DetailItem({ group, content, set }) {
   const groups = JSON.parse(localStorage.getItem("group")) || DEFAULT_GROUPS;

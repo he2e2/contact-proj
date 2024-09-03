@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { updatedState } from "@atoms";
 
+import { updatedState } from "@atoms";
 import { SearchCon } from "./SearchCon";
 import { List } from "./List";
 
