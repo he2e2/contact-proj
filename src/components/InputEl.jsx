@@ -3,30 +3,21 @@
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { updatedState } from "@atoms";
+import { validateCall, validateName } from "@shared";
 
-const validateName = (value) => {
-  if (!/^[가-힣]{2,}\d*$/.test(value)) {
-    return "이름은 한글로 두 글자 이상이어야 합니다.";
-  }
-  return "";
-};
-
-const validateCall = (value) => {
-  if (!/^010-\d{4}-\d{4}$/.test(value)) {
-    return "전화번호는 010-0000-0000 형식이어야 합니다.";
-  }
-  return "";
-};
-
-export function InputEl({ label, name, set }) {
+export function InputEl({ label, name, set, errorText }) {
   const [value, setValue] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(errorText);
 
   const isUpdated = useRecoilValue(updatedState);
 
   useEffect(() => {
     setValue("");
   }, [isUpdated]);
+
+  useEffect(() => {
+    setError(errorText);
+  }, [errorText]);
 
   const handleValidate = (e) => {
     if (e.target.name === "name") {

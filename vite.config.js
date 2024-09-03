@@ -19,6 +19,7 @@ export default defineConfig({
       "@assets": getAliasPath("./src/assets"),
       "@components": getAliasPath("./src/components"),
       "@atoms": getAliasPath("./src/atoms"),
+      "@shared": getAliasPath("./src/shared"),
     },
   },
 });
