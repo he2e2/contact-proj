@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { updatedState } from "@atoms";
-import { validateCall, validateName } from "@shared";
 
+import { updatedState } from "@atoms";
 import { InputEl } from "./InputEl";
 import { SelectEl } from "./SelectEl";
-
-const DEFAULT_GROUPS = ["가족", "친구", "직장", "스터디"];
+import { validateCall, validateName, DEFAULT_GROUPS } from "@shared";
 
 export function InputCon() {
   const [groups, setGroups] = useState(

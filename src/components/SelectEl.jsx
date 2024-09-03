@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import { updatedState } from "@atoms";
 
+import { updatedState } from "@atoms";
 import { GroupModal } from "./GroupModal";
 
 export function SelectEl({ groups, setSelected, setGroups }) {
