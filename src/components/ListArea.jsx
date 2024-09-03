@@ -10,20 +10,14 @@ export function ListArea() {
   const [groups, setGroups] = useState(
     JSON.parse(localStorage.getItem("contactList")) || []
   );
-  console.log(groups);
+
   return (
     <div className="list-area">
       <SearchCon />
       <div className="list-wrapper">
         {Object.entries(groups).map((list) => {
           return (
-            <List
-              key={list[1].name}
-              name={list[1].name}
-              call={list[1].call}
-              group={list[1].group}
-              setGroups={setGroups}
-            />
+            <List key={list[1].name} item={list[1]} setGroups={setGroups} />
           );
         })}
       </div>

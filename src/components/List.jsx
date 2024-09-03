@@ -4,7 +4,7 @@ import { DetailModal } from "./DetailModal";
 
 /* eslint-disable react/prop-types */
 
-export function List({ name, call, group, setGroups }) {
+export function List({ item, setGroups }) {
   const [isModal, setIsModal] = useState(false);
 
   const removeContact = () => {
@@ -19,16 +19,16 @@ export function List({ name, call, group, setGroups }) {
     <>
       <div className="list">
         <div className="info">
-          <span>{name}</span>
-          <span>{call}</span>
-          <span>{group}</span>
+          <span>{item.name}</span>
+          <span>{item.call}</span>
+          <span>{item.group}</span>
         </div>
         <div className="button-wrapper">
           <button onClick={() => setIsModal(true)}>세부사항</button>
           <button onClick={removeContact}>삭제</button>
         </div>
       </div>
-      {isModal && <DetailModal setIsModal={setIsModal} />}
+      {isModal && <DetailModal item={item} setIsModal={setIsModal} />}
     </>
   );
 }
