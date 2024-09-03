@@ -71,8 +71,10 @@ const switchName = {
   detail: "메모",
 };
 
+const DEFAULT_GROUPS = ["가족", "친구", "직장", "스터디"];
+
 function DetailItem({ group, content, set }) {
-  const groups = JSON.parse(localStorage.getItem("group"));
+  const groups = JSON.parse(localStorage.getItem("group")) || DEFAULT_GROUPS;
   return (
     <li className="group-item">
       <span>{switchName[group]}:</span>
