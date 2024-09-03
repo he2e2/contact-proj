@@ -144,7 +144,8 @@
   }
 }
 
-.group-wrapper {
+.group-wrapper,
+.detail-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -167,7 +168,8 @@
   }
 }
 
-.group-modal {
+.group-modal,
+.detail-modal {
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -205,4 +207,9 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  gap: 0.5rem;
+
+  .content {
+    flex: 1;
+  }
 }
