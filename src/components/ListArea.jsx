@@ -1,41 +1,28 @@
 import { SearchCon } from "./SearchCon";
 import { List } from "./List";
+import { useState } from "react";
 
-const dummy = {
-  0: {
-    name: "박은규",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-  1: {
-    name: "김영희",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-  2: {
-    name: "박민수",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-  3: {
-    name: "순심이",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-};
+/*
+TODO 검색 상태 관리
+*/
 
 export function ListArea() {
+  const [groups, setGroups] = useState(
+    JSON.parse(localStorage.getItem("contactList")) || []
+  );
+  console.log(groups);
   return (
     <div className="list-area">
       <SearchCon />
       <div className="list-wrapper">
-        {Object.entries(dummy).map((list) => {
+        {Object.entries(groups).map((list) => {
           return (
             <List
               key={list[1].name}
               name={list[1].name}
               call={list[1].call}
               group={list[1].group}
+              setGroups={setGroups}
             />
           );
         })}

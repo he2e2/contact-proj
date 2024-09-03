@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const validateName = (value) => {
-  if (!/^[가-힣]{2,}$/.test(value)) {
+  if (!/^[가-힣]{2,}\d*$/.test(value)) {
     return "이름은 한글로 두 글자 이상이어야 합니다.";
   }
   return "";
@@ -16,9 +16,16 @@ const validateCall = (value) => {
   return "";
 };
 
-export function InputEl({ label, name, set }) {
+export function InputEl({ label, name, set, isSave }) {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (isSave) {
+      setValue("");
+      set("");
+    }
+  }, [isSave]);
 
   const handleValidate = (e) => {
     if (e.target.name === "name") {
@@ -31,7 +38,7 @@ export function InputEl({ label, name, set }) {
   return (
     <div className="input-el">
       <label htmlFor={name}>{label}</label>
-      <div>
+      <div className="input-wrapper">
         <input
           type="text"
           placeholder={label}
