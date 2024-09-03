@@ -4,14 +4,14 @@ import { DetailModal } from "./DetailModal";
 
 /* eslint-disable react/prop-types */
 
-export function List({ item, setGroups }) {
+export function List({ item, setLists }) {
   const [isModal, setIsModal] = useState(false);
 
   const removeContact = () => {
     const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
 
     const updatedList = prevList.filter((item) => item.name !== name);
-    setGroups(updatedList);
+    setLists(updatedList);
     localStorage.setItem("contactList", JSON.stringify(updatedList));
   };
 
