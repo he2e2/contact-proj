@@ -13,6 +13,8 @@ export function GroupModal({ groups, setGroups, setIsModal }) {
     setNewGroup("");
   };
 
+  const allLists = JSON.parse(localStorage.getItem("contactList")) || [];
+
   return (
     <div className="group-wrapper">
       <button
@@ -33,6 +35,7 @@ export function GroupModal({ groups, setGroups, setIsModal }) {
                 group={group}
                 groups={groups}
                 setGroups={setGroups}
+                allLists={allLists}
               />
             );
           })}
@@ -51,16 +54,19 @@ export function GroupModal({ groups, setGroups, setIsModal }) {
   );
 }
 
-function GroupItem({ group, groups, setGroups }) {
+function GroupItem({ group, groups, setGroups, allLists }) {
   const removeGroup = () => {
     const updatedGroups = groups.filter((item) => item !== group);
     localStorage.setItem("group", JSON.stringify(updatedGroups));
     setGroups(updatedGroups);
   };
+
+  const isGroupInUse = allLists.some((item) => item.group === group);
+
   return (
     <li className="group-item">
       <span>{group}</span>
-      <i className="fa-solid fa-x" onClick={removeGroup}></i>
+      {!isGroupInUse && <i className="fa-solid fa-x" onClick={removeGroup}></i>}
     </li>
   );
 }

@@ -9,7 +9,9 @@ import { SelectEl } from "./SelectEl";
 const DEFAULT_GROUPS = ["가족", "친구", "직장", "스터디"];
 
 export function InputCon() {
-  const [groups, setGroups] = useState(DEFAULT_GROUPS);
+  const [groups, setGroups] = useState(
+    JSON.parse(localStorage.getItem("group")) || DEFAULT_GROUPS
+  );
   const [selectedGroup, setSelectedGroup] = useState("가족");
   const [name, setName] = useState("");
   const [call, setCall] = useState("");

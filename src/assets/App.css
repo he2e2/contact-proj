@@ -186,6 +186,7 @@
     color: white;
     background-color: #f54242;
     padding: 0.3rem 0.5rem;
+    border-radius: 4px;
   }
 }
 
@@ -221,6 +222,16 @@
       flex: 1;
       font-family: "Pretendard-Regular";
     }
+  }
+
+  .edit-button {
+    width: 100%;
+    border: none;
+    padding: 0.5rem;
+    color: white;
+    font-family: "Pretendard-Regular";
+    background-color: #0e8ae8;
+    border-radius: 6px;
   }
 }
 

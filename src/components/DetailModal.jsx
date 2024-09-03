@@ -18,6 +18,7 @@ export function DetailModal({ item, setIsModal }) {
             return <DetailItem key={group} group={group} content={content} />;
           })}
         </ul>
+        <button className="edit-button">수정</button>
       </section>
     </div>
   );
