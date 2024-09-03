@@ -6,8 +6,18 @@
   font-style: normal;
 }
 
+body {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
 #root {
   max-width: 1280px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .app {
@@ -15,8 +25,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  justify-content: center;
   color: #141414;
+  gap: 2rem;
+  padding: 2rem;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
 }
 
 .app > * {
@@ -74,6 +91,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    gap: 0.5rem;
 
     input {
       border-radius: 4px;
@@ -199,6 +217,12 @@
   align-items: center;
   padding: 1rem 2rem 2rem 2rem;
   border-radius: 10px;
+  gap: 1.5rem;
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
 
   ul {
     list-style: none;
@@ -208,6 +232,10 @@
     gap: 0.5rem;
 
     padding: 0;
+
+    li {
+      padding: 0.3rem 0;
+    }
   }
 
   .input-wrapper {

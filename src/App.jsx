@@ -1,3 +1,4 @@
+import "@assets/myreset.css";
 import "@assets/App.css";
 import { ListArea, InputCon } from "@components";
 

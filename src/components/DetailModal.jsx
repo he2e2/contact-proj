@@ -1,62 +1,58 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 
 import { updatedState } from "@atoms";
-import { validateCall, validateName, DEFAULT_GROUPS } from "@shared";
+import { useInputState } from "@features";
 
 export function DetailModal({ item, setIsModal }) {
-  const [group, setGroup] = useState(item.group);
-  const [name, setName] = useState(item.name);
-  const [call, setCall] = useState(item.call);
-  const [detail, setDetail] = useState(item.detail);
+  const {
+    groups,
+    selectedGroup,
+    name,
+    call,
+    detail,
+    setSelectedGroup,
+    setName,
+    setCall,
+    setDetail,
+    editData,
+  } = useInputState(item.name, item.call, item.group, item.detail);
 
   const setIsUpdated = useSetRecoilState(updatedState);
 
-  const editInfo = () => {
-    if (validateName(name) || validateCall(call)) {
-      alert(`${validateName(name) || ""}\n${validateCall(call) || ""}`);
-      return;
-    }
-
-    const updatedItem = {
-      name,
-      call,
-      group,
-      detail,
-    };
-
-    const contactList = JSON.parse(localStorage.getItem("contactList")) || [];
-    const updatedContacts = contactList.map((contact) =>
-      contact.name === item.name ? updatedItem : contact
-    );
-
-    localStorage.setItem("contactList", JSON.stringify(updatedContacts));
-    setIsUpdated((prev) => !prev);
-    alert("수정 되었습니다!");
-    setIsModal(false);
-  };
+  const fields = [
+    { key: "name", value: name, setter: setName },
+    { key: "call", value: call, setter: setCall },
+    { key: "group", value: selectedGroup, setter: setSelectedGroup },
+    { key: "detail", value: detail, setter: setDetail },
+  ];
 
   return (
     <div className="detail-wrapper">
-      <button
-        className="close-button"
-        onClick={() => {
-          setIsModal(false);
-        }}
-      >
+      <button className="close-button" onClick={() => setIsModal(false)}>
         닫기
       </button>
       <section className="detail-modal">
         <h2>연락처 상세 정보</h2>
         <ul>
-          <DetailItem group="name" content={name} set={setName} />
-          <DetailItem group="call" content={call} set={setCall} />
-          <DetailItem group="group" content={group} set={setGroup} />
-          <DetailItem group="detail" content={detail} set={setDetail} />
+          {fields.map(({ key, value, setter }) => (
+            <DetailItem
+              key={key}
+              fieldKey={key}
+              content={value}
+              set={setter}
+              label={switchName[key]}
+              groups={groups}
+            />
+          ))}
         </ul>
-        <button className="edit-button" onClick={editInfo}>
+        <button
+          className="edit-button"
+          onClick={() => {
+            editData(setIsUpdated, setIsModal, item);
+          }}
+        >
           수정
         </button>
       </section>
@@ -71,31 +67,30 @@ const switchName = {
   detail: "메모",
 };
 
-function DetailItem({ group, content, set }) {
-  const groups = JSON.parse(localStorage.getItem("group")) || DEFAULT_GROUPS;
+function DetailItem({ fieldKey, content, set, label, groups }) {
+  const renderInputField = () => {
+    if (fieldKey === "group") {
+      return (
+        <select value={content} onChange={(e) => set(e.target.value)}>
+          {groups.map((group) => (
+            <option key={group}>{group}</option>
+          ))}
+        </select>
+      );
+    }
+    return (
+      <input
+        className="content"
+        value={content}
+        onChange={(e) => set(e.target.value)}
+      />
+    );
+  };
+
   return (
     <li className="group-item">
-      <span>{switchName[group]}:</span>
-      {group !== "group" ? (
-        <input
-          className="content"
-          value={content}
-          onChange={(e) => {
-            set(e.target.value);
-          }}
-        />
-      ) : (
-        <select
-          value={content}
-          onChange={(e) => {
-            set(e.target.value);
-          }}
-        >
-          {groups.map((group) => {
-            return <option key={group}>{group}</option>;
-          })}
-        </select>
-      )}
+      <span>{label}:</span>
+      {renderInputField()}
     </li>
   );
 }
