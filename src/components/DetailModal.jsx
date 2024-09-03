@@ -1,19 +1,20 @@
 /* eslint-disable react/prop-types */
 
-const groups = {
-  이름: "박은규",
-  전화번호: "010-2222-2222",
-  그룹: "가족",
-  메모: "동생",
-};
-export function DetailModal() {
+export function DetailModal({ item, setIsModal }) {
   return (
     <div className="detail-wrapper">
-      <button className="close-button">닫기</button>
+      <button
+        className="close-button"
+        onClick={() => {
+          setIsModal(false);
+        }}
+      >
+        닫기
+      </button>
       <section className="detail-modal">
         <h2>연락처 상세 정보</h2>
         <ul>
-          {Object.entries(groups).map(([group, content]) => {
+          {Object.entries(item).map(([group, content]) => {
             return <DetailItem key={group} group={group} content={content} />;
           })}
         </ul>
