@@ -14,8 +14,6 @@ export function InputCon() {
   const [call, setCall] = useState("");
   const [detail, setDetail] = useState("");
 
-  const [isSave, setIsSave] = useState(false);
-
   const setIsUpdated = useSetRecoilState(updatedState);
 
   const saveData = () => {
@@ -28,26 +26,19 @@ export function InputCon() {
     const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
     localStorage.setItem("contactList", JSON.stringify([data, ...prevList]));
 
-    setIsSave(true);
     setIsUpdated((prev) => !prev);
   };
 
   return (
     <div className="input-con">
-      <InputEl label="이름" name="name" set={setName} isSave={isSave} />
-      <InputEl label="전화번호" name="call" set={setCall} isSave={isSave} />
+      <InputEl label="이름" name="name" set={setName} />
+      <InputEl label="전화번호" name="call" set={setCall} />
       <SelectEl
         groups={groups}
         setSelected={setSelectedGroup}
         setGroups={setGroups}
-        isSave={isSave}
       />
-      <InputEl
-        label="간단한기록"
-        name="detail"
-        set={setDetail}
-        isSave={isSave}
-      />
+      <InputEl label="간단한기록" name="detail" set={setDetail} />
       <button className="save-button" onClick={saveData}>
         저장
       </button>

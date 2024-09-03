@@ -1,16 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { updatedState } from "@atoms";
+
 import { GroupModal } from "./GroupModal";
 
-export function SelectEl({ groups, setSelected, setGroups, isSave }) {
+export function SelectEl({ groups, setSelected, setGroups }) {
   const [selectedGroup, setSelectedGroup] = useState("가족");
   const [isModal, setIsModal] = useState(false);
 
+  const isUpdated = useRecoilValue(updatedState);
+
   useEffect(() => {
-    if (isSave) {
-      setSelectedGroup("가족");
-    }
-  }, [isSave]);
+    setSelectedGroup("가족");
+  }, [isUpdated]);
 
   return (
     <>

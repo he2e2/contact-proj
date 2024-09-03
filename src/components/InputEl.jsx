@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { updatedState } from "@atoms";
 
 const validateName = (value) => {
   if (!/^[가-힣]{2,}\d*$/.test(value)) {
@@ -16,16 +18,15 @@ const validateCall = (value) => {
   return "";
 };
 
-export function InputEl({ label, name, set, isSave }) {
+export function InputEl({ label, name, set }) {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
+  const isUpdated = useRecoilValue(updatedState);
+
   useEffect(() => {
-    if (isSave) {
-      setValue("");
-      set("");
-    }
-  }, [isSave]);
+    setValue("");
+  }, [isUpdated]);
 
   const handleValidate = (e) => {
     if (e.target.name === "name") {
