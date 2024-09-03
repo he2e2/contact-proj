@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { updatedState } from "@atoms";
 
 import { InputEl } from "./InputEl";
 import { SelectEl } from "./SelectEl";
@@ -14,6 +16,8 @@ export function InputCon() {
 
   const [isSave, setIsSave] = useState(false);
 
+  const setIsUpdated = useSetRecoilState(updatedState);
+
   const saveData = () => {
     const data = {
       name: name,
@@ -23,7 +27,9 @@ export function InputCon() {
     };
     const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
     localStorage.setItem("contactList", JSON.stringify([data, ...prevList]));
+
     setIsSave(true);
+    setIsUpdated((prev) => !prev);
   };
 
   return (

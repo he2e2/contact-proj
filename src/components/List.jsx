@@ -10,7 +10,9 @@ export function List({ item, setLists }) {
   const removeContact = () => {
     const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
 
-    const updatedList = prevList.filter((item) => item.name !== name);
+    const updatedList = prevList.filter(
+      (listItem) => listItem.name !== item.name
+    );
     setLists(updatedList);
     localStorage.setItem("contactList", JSON.stringify(updatedList));
   };

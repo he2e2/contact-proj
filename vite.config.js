@@ -18,6 +18,7 @@ export default defineConfig({
       "@": getAliasPath("./src"),
       "@assets": getAliasPath("./src/assets"),
       "@components": getAliasPath("./src/components"),
+      "@atoms": getAliasPath("./src/atoms"),
     },
   },
 });
