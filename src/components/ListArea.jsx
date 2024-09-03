@@ -1,43 +1,26 @@
+import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { updatedState } from "@atoms";
+
 import { SearchCon } from "./SearchCon";
 import { List } from "./List";
 
-const dummy = {
-  0: {
-    name: "박은규",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-  1: {
-    name: "김영희",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-  2: {
-    name: "박민수",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-  3: {
-    name: "순심이",
-    call: "010-1111-2222",
-    group: "직장",
-  },
-};
-
 export function ListArea() {
+  const [lists, setLists] = useState(
+    JSON.parse(localStorage.getItem("contactList")) || []
+  );
+  const isUpdated = useRecoilValue(updatedState);
+
+  useEffect(() => {
+    setLists(JSON.parse(localStorage.getItem("contactList")) || []);
+  }, [isUpdated]);
+
   return (
     <div className="list-area">
-      <SearchCon />
+      <SearchCon setLists={setLists} />
       <div className="list-wrapper">
-        {Object.entries(dummy).map((list) => {
-          return (
-            <List
-              key={list[1].name}
-              name={list[1].name}
-              call={list[1].call}
-              group={list[1].group}
-            />
-          );
+        {Object.entries(lists).map((list) => {
+          return <List key={list[1].name} item={list[1]} setLists={setLists} />;
         })}
       </div>
     </div>
