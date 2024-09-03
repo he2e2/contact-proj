@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export function SearchCon({ setLists }) {
   const [searchText, setSearchText] = useState("");
+  const inputRef = useRef(null);
 
   const displayAllLists = () => {
     setLists(JSON.parse(localStorage.getItem("contactList")) || []);
@@ -19,11 +20,15 @@ export function SearchCon({ setLists }) {
     );
 
     setLists(filteredContacts);
+
+    setSearchText("");
+    inputRef.current.blur();
   };
 
   return (
     <div className="search-con">
       <input
+        ref={inputRef}
         type="text"
         placeholder="검색어를 입력 후 엔터를 누르세요"
         value={searchText}
