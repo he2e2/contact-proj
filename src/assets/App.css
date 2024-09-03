@@ -240,8 +240,19 @@
   width: 100%;
   justify-content: space-between;
   gap: 0.5rem;
+  align-items: center;
 
-  .content {
+  span {
+    width: 4rem;
+  }
+
+  input,
+  select {
+    font-family: "Pretendard-Regular";
+    border: none;
+    border-radius: 4px;
+    background-color: #deeefa;
+    padding: 0.3rem;
     flex: 1;
   }
 }
