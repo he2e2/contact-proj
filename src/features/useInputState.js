@@ -43,20 +43,25 @@ export function useInputState(
       return;
     }
 
+    const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
+    const lastId = prevList.length > 0 ? prevList[0].id : 0;
+    const newId = lastId + 1;
+
     const data = {
+      id: newId,
       name,
       call,
       group: selectedGroup,
       detail,
     };
-    const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
+
     localStorage.setItem("contactList", JSON.stringify([data, ...prevList]));
 
     setIsUpdated((prev) => !prev);
   };
 
   const editData = (setIsUpdated, setIsModal, item) => {
-    if (checkDuplicate(name, call)) {
+    if (checkDuplicate(name, call, item.id)) {
       alert("이미 같은 이름 혹은 전화번호의 연락처가 존재합니다.");
       return;
     }
@@ -67,6 +72,7 @@ export function useInputState(
     }
 
     const updatedItem = {
+      id: item.id,
       name,
       call,
       group: selectedGroup,
