@@ -12,11 +12,11 @@ export const validateCall = (value) => {
   return "";
 };
 
-export const checkDuplicate = (name, call) => {
+export const checkDuplicate = (name, call, id) => {
   const prevList = JSON.parse(localStorage.getItem("contactList")) || [];
 
   return (
-    prevList.some((item) => item.name === name) ||
-    prevList.some((item) => item.call === call)
+    prevList.some((item) => item.id !== id && item.name === name) ||
+    prevList.some((item) => item.id !== id && item.call === call)
   );
 };
